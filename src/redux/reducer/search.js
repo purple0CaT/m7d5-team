@@ -5,6 +5,7 @@ export const searchReducer = (state = initialState.search, action) => {
     case "NAME":
       return {
         ...state,
+        
       };
 
     default:
