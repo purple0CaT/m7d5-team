@@ -17,7 +17,7 @@ const isLiked = liked.find((j) => j._id === song._id)
 return (
   <div className="container-fluid fixed-bottom bg-container pt-1">
     <Row>
-      <Col xs="5">
+      <Col xs="4">
         {album[0] && song[0] ? (
           <div className="player-align d-flex">
             <div>
@@ -39,9 +39,9 @@ return (
           <div></div>
         )}
       </Col>
-      <Col xs="7">
+      <Col xs="8">
         <Row className="mr-auto">
-          <div className="col-lg-10">
+          <div className="col-lg-10 pl-0">
             <Row>
               <div className="col-6 col-md-4 col-lg-2 offset-md-4 offset-lg-5 playerControls mt-1">
                 <Row>
