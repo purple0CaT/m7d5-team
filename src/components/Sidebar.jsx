@@ -1,6 +1,14 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import {AiFillLike} from "react-icons/ai";
+import {RiPlayList2Fill} from "react-icons/ri"
+import {connect} from "react-redux"
 
+const read = state => ({
+  likeslength: state.user.liked.length,
+  playlistonelength: state.user.playlist1.length,
+  playlisttwolength: state.user.playlist2.length
+})
 class Sidebar extends React.Component {
   state = {
     searchInput: "",
@@ -47,6 +55,27 @@ class Sidebar extends React.Component {
                       Library
                     </Link>
                   </li>
+
+                  {/* Sai Additions below */}
+
+                  <li className="nav-item nav-link">
+                   <Link to="/likes" className="nav-item nav-link">
+                     <i style={{color:"whitesmoke"}}><AiFillLike style={{color:'yellow'}} className='mr-3'/>Likes <span className='ml-2'>{this.props.likeslength}</span></i>
+                    </Link>
+                  </li>
+                  <li className="nav-item nav-link">
+                  <Link to="/playlistone" className="nav-item nav-link">
+                    <p style={{color:"whitesmoke"}}><RiPlayList2Fill style={{color:'blue'}} className='mr-3'/>Playlist1 <span className='ml-2'>{this.props.playlistonelength}</span></p>
+                    </Link>
+                  </li>
+                     <li className="nav-item nav-link">
+                  <Link to="/playlisttwo" className="nav-item nav-link">
+                    <p style={{color:"whitesmoke"}}><RiPlayList2Fill style={{color:'skyblue'}} className='mr-3'/>Playlist2 <span className='ml-2'>{this.props.playlisttwolength}</span></p>
+                    </Link>
+                  </li>
+
+              {/* ends here */}
+
                   {this.props.location.pathname === "/" && (
                     <li>
                       <div className="input-group mt-3">
@@ -101,4 +130,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default withRouter(Sidebar);
+export default  connect(read)(withRouter(Sidebar));
