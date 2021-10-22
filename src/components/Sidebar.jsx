@@ -1,11 +1,18 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import { SearchIt, setQuery } from "../redux/action/search";
+const mapStateToProps = (state) => ({ search: state.search });
+const mapDispatchToProps = (dispatch) => ({
+  searchData: (value) => {
+    dispatch(SearchIt(value));
+  },
+  setSearchQuery: (query) => {
+    dispatch(setQuery(query));
+  },
+});
 
 class Sidebar extends React.Component {
-  state = {
-    searchInput: "",
-  };
-
   render() {
     return (
       <div className="col-2">
@@ -51,16 +58,15 @@ class Sidebar extends React.Component {
                     <li>
                       <div className="input-group mt-3">
                         <input
+                          value={this.props.search.query}
                           type="text"
                           className="form-control mb-2"
                           id="searchField"
-                          placeholder="Search"
+                          placeholder="...search"
                           aria-label="Search"
                           aria-describedby="basic-addon2"
-                          onChange={(event) =>
-                            this.setState({
-                              searchInput: event.currentTarget.value,
-                            })
+                          onChange={(e) =>
+                            this.props.setSearchQuery(e.target.value)
                           }
                         />
                         <div
@@ -71,9 +77,7 @@ class Sidebar extends React.Component {
                             className="btn btn-outline-secondary btn-sm"
                             type="button"
                             id="button-addon1"
-                            onClick={() =>
-                              this.props.search(this.state.searchInput)
-                            }
+                            onClick={() => this.props.searchData()}
                           >
                             GO
                           </button>
@@ -101,4 +105,7 @@ class Sidebar extends React.Component {
   }
 }
 
-export default withRouter(Sidebar);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Sidebar));
