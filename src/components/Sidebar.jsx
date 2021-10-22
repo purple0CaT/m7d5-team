@@ -34,6 +34,7 @@ class Sidebar extends React.Component {
                 alt="Spotify_Logo"
                 width="131"
                 height="40"
+                onClick={() => this.props.setSearchQuery("")}
               />
             </Link>
             <button
@@ -51,12 +52,20 @@ class Sidebar extends React.Component {
               <div className="navbar-nav">
                 <ul>
                   <li>
-                    <Link to="/" className="nav-item nav-link">
+                    <Link
+                      to="/"
+                      className="nav-item nav-link"
+                      onClick={() => this.props.setSearchQuery("")}
+                    >
                       <i className="fas fa-home fa-lg"></i>&nbsp; Home
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="nav-item nav-link">
+                    <Link
+                      to="/"
+                      className="nav-item nav-link"
+                      onClick={() => this.props.setSearchQuery("")}
+                    >
                       <i className="fas fa-book-open fa-lg"></i>&nbsp; Your
                       Library
                     </Link>

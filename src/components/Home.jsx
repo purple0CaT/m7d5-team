@@ -127,7 +127,6 @@ class Home extends React.Component {
         {this.props.search.loading && (
           <div className="d-flex mt-5">
             <Spinner className="mx-auto text-white" animation="border" />
-            123
           </div>
         )}
         {this.props.search.data.length === 0 && (
