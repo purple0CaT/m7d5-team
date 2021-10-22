@@ -1,4 +1,4 @@
-import { Row, ListGroup  } from "react-bootstrap";
+import { Row, ListGroup, Badge } from "react-bootstrap";
 import { connect } from "react-redux"
 import {playlist_two_remove_Action} from "../redux/action/user.js"
 import {ImBin2} from "react-icons/im"
@@ -15,7 +15,7 @@ const write = (dispatch) => ({
 })
 
 const Playlist2 = ({Playlisttwo, removefromplaylisttwo}) => {
-    return(
+    return Playlisttwo.length>0 ? (
         <>
        <div className="col-12 col-md-9 offset-md-3 mainPage">
         <Row className="mb-3">
@@ -42,6 +42,12 @@ const Playlist2 = ({Playlisttwo, removefromplaylisttwo}) => {
       )}
         </div>
         </>
+    ): (
+      <Row className='mt-5'>
+      <h3  bg="warning" text="dark" style={{color: "skyblue"}}>
+      No Items in Playlist_Two.....Add your Favourite songs!!
+    </h3>
+    </Row>
     )
 }
 

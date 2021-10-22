@@ -1,6 +1,6 @@
 import { Row } from "react-bootstrap";
 import { connect } from "react-redux"
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Badge } from "react-bootstrap";
 import {Likes_remove_Action} from "../redux/action/user.js"
 import {ImBin2} from "react-icons/im"
 
@@ -15,8 +15,9 @@ const write = (dispatch) => ({
 })
 
 const Likes = ({Likes, removefromLikes}) => {
-  return (<>
-    {console.log(Likes)}
+ 
+  return Likes.length>0 ? (<>
+    
       <div className="col-12 col-md-9 offset-md-3 mainPage">
         <Row className="mb-3">
           <div className="col-9 col-lg-11 mainLinks d-none d-md-flex">
@@ -41,6 +42,12 @@ const Likes = ({Likes, removefromLikes}) => {
       )}
       </div>
     </>
+  ): (
+    <Row className='mt-5'>
+    <h3  bg="warning" text="dark" style={{color: "yellow"}}>
+    No Likes Added Yet!! ....click on Album to do so
+  </h3>
+  </Row>
   )
 }
 

@@ -1,6 +1,6 @@
 import { Row } from "react-bootstrap";
 import { connect } from "react-redux"
-import { ListGroup } from "react-bootstrap";
+import { ListGroup, Badge } from "react-bootstrap";
 import {playlist_one_remove_Action} from "../redux/action/user.js"
 import {ImBin2} from "react-icons/im"
 
@@ -15,7 +15,7 @@ const write = (dispatch) => ({
 })
 
 const Playlist1 = ({Playlistone, removefromplaylistone}) => {
-    return(<>
+    return Playlistone.length>0 ? (<>
          {console.log(Playlistone)}
       <div className="col-12 col-md-9 offset-md-3 mainPage">
         <Row className="mb-3">
@@ -42,6 +42,12 @@ const Playlist1 = ({Playlistone, removefromplaylistone}) => {
         
         </div>
         </>
+    ): (
+      <Row className='mt-5'>
+      <h3  bg="warning" text="dark" style={{color: "thistle"}}>
+      No Items in Playlist_one.....Add your Favourite songs
+    </h3>
+    </Row>
     )
 }
 
