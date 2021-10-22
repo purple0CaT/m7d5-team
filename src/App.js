@@ -7,6 +7,11 @@ import Home from "./components/Home";
 import { Row } from "react-bootstrap";
 import Artist from "./components/Artist";
 import Album from "./components/Album";
+import 'bootstrap/dist/css/bootstrap.min.css'
+///// Sai Imports  <<<<---
+import playlist1 from "./components/Playlist_one"
+import playlist2 from "./components/Playlist_two"
+import Likes from "./components/Likes"
 
 let headers = new Headers({
   "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
@@ -55,6 +60,9 @@ class App extends React.Component {
             />
             <Route path="/artist/:id" component={Artist} />
             <Route path="/album/:id" component={Album} />
+            <Route path="/likes" exact component = {Likes}/>
+            <Route path="/playlistone" exact component = {playlist1}/>
+            <Route path="/playlisttwo" exact component = {playlist2}/>
           </Row>
         </div>
         <Player />

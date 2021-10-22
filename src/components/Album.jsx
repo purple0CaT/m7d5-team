@@ -1,6 +1,10 @@
 import React from "react";
 import Song from "./Song";
 import { Row } from "react-bootstrap";
+import {connect} from "react-redux"
+import {AddLikesAction, AddPlaylistoneAction, AddPlaylisttwoAction} from "../redux/action/user.js"
+//album/247629
+const read = state => state
 
 import { connect } from 'react-redux'
 import { addPlaylistAction, addAlbumAction } from "../redux/action/player";
@@ -13,6 +17,18 @@ const mapDispatchToProps = (dispatch) => ({
   },
   addAlbumToPlaylist: (album) => {
     dispatch(addAlbumAction(album))
+  }
+})
+
+const write = (dispatch) => ({
+  AddLikes: (Album) => {
+      dispatch(AddLikesAction(Album))
+  },
+  AddPlaylistone: (Album) => {
+    dispatch(AddPlaylistoneAction(Album))
+  },
+  AddPlaylisttwo: (Album) => {
+    dispatch(AddPlaylisttwoAction(Album))
   }
 })
 
@@ -91,8 +107,28 @@ class Album extends React.Component {
                   Play
                 </button>
               </div>
+
+              {/* Sai Additions */}
+              <div className="mt-4 text-center">
+                <button id="btnPlay" className="btn btn-warning" type="button" onClick={e => this.props.AddLikes(this.state.album)}>
+                  Like
+                </button>
+              </div>
+              <div className="mt-4 text-center">
+                <button id="btnPlay" className="btn btn-primary" type="button" onClick={e => this.props.AddPlaylistone(this.state.album)}>
+               Add to PlayList one
+                </button>
+              </div>
+              <div className="mt-4 text-center">
+                <button id="btnPlay" className="btn btn-info" type="button" onClick={e => this.props.AddPlaylisttwo(this.state.album)}>
+                 Add to PlayList Two
+                </button>
+              </div>
+              {/* Ends here */}
+
             </div>
           )}
+          {/* songs row */}
           <div className="col-md-8 p-5">
             <Row>
               <div className="col-md-10 mb-5" id="trackList">
