@@ -2,12 +2,25 @@ import React from "react";
 import Song from "./Song";
 import { Row } from "react-bootstrap";
 
+import { connect } from 'react-redux'
+import { addPlaylistAction, addAlbumAction } from "../redux/action/player";
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  addTrackToPlaylist: (song) => {
+    dispatch(addPlaylistAction(song))
+  },
+  addAlbumToPlaylist: (album) => {
+    dispatch(addAlbumAction(album))
+  }
+})
+
 class Album extends React.Component {
   state = {
     album: {},
     songs: [],
   };
-
   componentDidMount = async () => {
     let albumId = this.props.match.params.id;
 
@@ -31,6 +44,8 @@ class Album extends React.Component {
           album,
           songs: album.tracks.data,
         });
+        console.log("SONGS", this.state.songs)
+        
       }
     } catch (exception) {
       console.log(exception);
@@ -66,7 +81,13 @@ class Album extends React.Component {
                 </p>
               </div>
               <div className="mt-4 text-center">
-                <button id="btnPlay" className="btn btn-success" type="button">
+                <button id="btnPlay" className="btn btn-success" type="button"
+                onClick={() =>{
+                  this.props.addTrackToPlaylist(this.state.songs[0])
+                  this.props.addAlbumToPlaylist(this.state.album)
+                  
+                }}
+                >
                   Play
                 </button>
               </div>
@@ -76,7 +97,7 @@ class Album extends React.Component {
             <Row>
               <div className="col-md-10 mb-5" id="trackList">
                 {this.state.songs.map((song) => (
-                  <Song track={song} key={song.id} />
+                  <Song track={song} key={song.id} album={this.state.album} />
                 ))}
               </div>
             </Row>
@@ -87,4 +108,4 @@ class Album extends React.Component {
   }
 }
 
-export default Album;
+export default connect(mapStateToProps, mapDispatchToProps)(Album)
