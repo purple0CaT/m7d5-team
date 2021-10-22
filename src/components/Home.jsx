@@ -110,16 +110,11 @@ class Home extends React.Component {
             <div>DISCOVER</div>
           </div>
         </Row>
-        {this.props.search.query.length > 0 && (
+        {this.props.search.data.length > 0 && (
           <Row>
             <Col xs={10}>
               <div id="searchResults">
                 <h2>Search Results</h2>
-                {this.props.search.loading && (
-                  <div className="d-flex">
-                    <Spinner className="mx-auto" animation="border" />
-                  </div>
-                )}
                 <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
                   {this.props.search.data.map((song) => (
                     <AlbumCard song={song} key={song.id} />
@@ -129,7 +124,13 @@ class Home extends React.Component {
             </Col>
           </Row>
         )}
-        {this.props.search.query.length === 0 && (
+        {this.props.search.loading && (
+          <div className="d-flex mt-5">
+            <Spinner className="mx-auto text-white" animation="border" />
+            123
+          </div>
+        )}
+        {this.props.search.data.length === 0 && (
           <>
             <Row>
               <Col xs={10}>

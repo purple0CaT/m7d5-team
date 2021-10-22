@@ -1,15 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { cleanUp } from "../redux/action/search";
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  cleanUpData: (value) => {
+    dispatch(cleanUp(value));
+  },
+});
 
-const AlbumCard = ({ song }) => (
+const AlbumCard = ({ song, cleanUpData }) => (
   <div className="col text-center" id={song.id}>
-    <Link to={"/album/" + song.album.id}>
+    <Link to={"/album/" + song.album.id} onClick={() => cleanUpData()}>
       <div>
         <img className="img-fluid" src={song.album.cover_medium} alt="1" />
       </div>
     </Link>
     <p>
-      <Link to={"/album/" + song.album.id}>
+      <Link to={"/album/" + song.album.id} onClick={() => cleanUpData()}>
         <span>Album:&nbsp;</span>
         <span>
           "
@@ -20,7 +28,7 @@ const AlbumCard = ({ song }) => (
         </span>
         <br />
       </Link>
-      <Link to={"/artist/" + song.artist.id}>
+      <Link to={"/artist/" + song.artist.id} onClick={() => cleanUpData()}>
         <span>Artist:&nbsp;</span>
         <span>{song.artist.name}</span>
       </Link>
@@ -28,4 +36,4 @@ const AlbumCard = ({ song }) => (
   </div>
 );
 
-export default AlbumCard;
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumCard);

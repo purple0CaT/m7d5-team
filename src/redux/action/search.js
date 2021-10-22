@@ -42,5 +42,19 @@ export const setQuery = (value) => {
       type: "SET_SEARCH",
       payload: value,
     });
+    if (value.length === 0) {
+      dispatch({
+        type: "SEARCH_CLEAN_UP",
+        payload: value,
+      });
+    }
+  };
+};
+export const cleanUp = (value) => {
+  return async (dispatch) => {
+    dispatch({
+      type: "SEARCH_CLEAN_UP",
+      payload: value,
+    });
   };
 };
