@@ -1,36 +1,32 @@
 import React from "react";
 import Song from "./Song";
 import { Row } from "react-bootstrap";
-import {connect} from "react-redux"
-import {AddLikesAction, AddPlaylistoneAction, AddPlaylisttwoAction} from "../redux/action/user.js"
-//album/247629
-const read = state => state
-
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
+import {
+  AddLikesAction,
+  AddPlaylistoneAction,
+  AddPlaylisttwoAction,
+} from "../redux/action/user.js";
 import { addPlaylistAction, addAlbumAction } from "../redux/action/player";
-
-const mapStateToProps = state => ({})
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   addTrackToPlaylist: (song) => {
-    dispatch(addPlaylistAction(song))
+    dispatch(addPlaylistAction(song));
   },
   addAlbumToPlaylist: (album) => {
-    dispatch(addAlbumAction(album))
-  }
-})
-
-const write = (dispatch) => ({
+    dispatch(addAlbumAction(album));
+  },
   AddLikes: (Album) => {
-      dispatch(AddLikesAction(Album))
+    dispatch(AddLikesAction(Album));
   },
   AddPlaylistone: (Album) => {
-    dispatch(AddPlaylistoneAction(Album))
+    dispatch(AddPlaylistoneAction(Album));
   },
   AddPlaylisttwo: (Album) => {
-    dispatch(AddPlaylisttwoAction(Album))
-  }
-})
+    dispatch(AddPlaylisttwoAction(Album));
+  },
+});
 
 class Album extends React.Component {
   state = {
@@ -60,8 +56,7 @@ class Album extends React.Component {
           album,
           songs: album.tracks.data,
         });
-        console.log("SONGS", this.state.songs)
-        
+        console.log("SONGS", this.state.songs);
       }
     } catch (exception) {
       console.log(exception);
@@ -97,12 +92,14 @@ class Album extends React.Component {
                 </p>
               </div>
               <div className="mt-4 text-center">
-                <button id="btnPlay" className="btn btn-success" type="button"
-                onClick={() =>{
-                  this.props.addTrackToPlaylist(this.state.songs[0])
-                  this.props.addAlbumToPlaylist(this.state.album)
-                  
-                }}
+                <button
+                  id="btnPlay"
+                  className="btn btn-success"
+                  type="button"
+                  onClick={() => {
+                    this.props.addTrackToPlaylist(this.state.songs[0]);
+                    this.props.addAlbumToPlaylist(this.state.album);
+                  }}
                 >
                   Play
                 </button>
@@ -110,22 +107,36 @@ class Album extends React.Component {
 
               {/* Sai Additions */}
               <div className="mt-4 text-center">
-                <button id="btnPlay" className="btn btn-warning" type="button" onClick={e => this.props.AddLikes(this.state.album)}>
+                <button
+                  id="btnPlay"
+                  className="btn btn-warning"
+                  type="button"
+                  onClick={(e) => this.props.AddLikes(this.state.album)}
+                >
                   Like
                 </button>
               </div>
               <div className="mt-4 text-center">
-                <button id="btnPlay" className="btn btn-primary" type="button" onClick={e => this.props.AddPlaylistone(this.state.album)}>
-               Add to PlayList one
+                <button
+                  id="btnPlay"
+                  className="btn btn-primary"
+                  type="button"
+                  onClick={(e) => this.props.AddPlaylistone(this.state.album)}
+                >
+                  Add to PlayList one
                 </button>
               </div>
               <div className="mt-4 text-center">
-                <button id="btnPlay" className="btn btn-info" type="button" onClick={e => this.props.AddPlaylisttwo(this.state.album)}>
-                 Add to PlayList Two
+                <button
+                  id="btnPlay"
+                  className="btn btn-info"
+                  type="button"
+                  onClick={(e) => this.props.AddPlaylisttwo(this.state.album)}
+                >
+                  Add to PlayList Two
                 </button>
               </div>
               {/* Ends here */}
-
             </div>
           )}
           {/* songs row */}
@@ -144,4 +155,4 @@ class Album extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Album)
+export default connect(mapStateToProps, mapDispatchToProps)(Album);

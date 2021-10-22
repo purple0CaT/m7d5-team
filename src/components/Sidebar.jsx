@@ -2,7 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { SearchIt, setQuery } from "../redux/action/search";
-const mapStateToProps = (state) => ({ search: state.search });
+import { AiFillLike } from "react-icons/ai";
+import { RiPlayList2Fill } from "react-icons/ri";
+const mapStateToProps = (state) => ({
+  search: state.search,
+  likeslength: state.user.liked.length,
+  playlistonelength: state.user.playlist1.length,
+  playlisttwolength: state.user.playlist2.length,
+});
 const mapDispatchToProps = (dispatch) => ({
   searchData: (value) => {
     dispatch(SearchIt(value));
@@ -11,14 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setQuery(query));
   },
 });
-import {AiFillLike} from "react-icons/ai";
-import {RiPlayList2Fill} from "react-icons/ri"
 
-const read = state => ({
-  likeslength: state.user.liked.length,
-  playlistonelength: state.user.playlist1.length,
-  playlisttwolength: state.user.playlist2.length
-})
 class Sidebar extends React.Component {
   render() {
     return (
@@ -65,22 +65,47 @@ class Sidebar extends React.Component {
                   {/* Sai Additions below */}
 
                   <li className="nav-item nav-link">
-                   <Link to="/likes" className="nav-item nav-link">
-                     <i style={{color:"whitesmoke"}}><AiFillLike style={{color:'yellow'}} className='mr-3'/>Likes <span className='ml-2'>{this.props.likeslength}</span></i>
+                    <Link to="/likes" className="nav-item nav-link">
+                      <i style={{ color: "whitesmoke" }}>
+                        <AiFillLike
+                          style={{ color: "yellow" }}
+                          className="mr-3"
+                        />
+                        Likes{" "}
+                        <span className="ml-2">{this.props.likeslength}</span>
+                      </i>
                     </Link>
                   </li>
                   <li className="nav-item nav-link">
-                  <Link to="/playlistone" className="nav-item nav-link">
-                    <p style={{color:"whitesmoke"}}><RiPlayList2Fill style={{color:'blue'}} className='mr-3'/>Playlist1 <span className='ml-2'>{this.props.playlistonelength}</span></p>
+                    <Link to="/playlistone" className="nav-item nav-link">
+                      <p style={{ color: "whitesmoke" }}>
+                        <RiPlayList2Fill
+                          style={{ color: "blue" }}
+                          className="mr-3"
+                        />
+                        Playlist1{" "}
+                        <span className="ml-2">
+                          {this.props.playlistonelength}
+                        </span>
+                      </p>
                     </Link>
                   </li>
-                     <li className="nav-item nav-link">
-                  <Link to="/playlisttwo" className="nav-item nav-link">
-                    <p style={{color:"whitesmoke"}}><RiPlayList2Fill style={{color:'skyblue'}} className='mr-3'/>Playlist2 <span className='ml-2'>{this.props.playlisttwolength}</span></p>
+                  <li className="nav-item nav-link">
+                    <Link to="/playlisttwo" className="nav-item nav-link">
+                      <p style={{ color: "whitesmoke" }}>
+                        <RiPlayList2Fill
+                          style={{ color: "skyblue" }}
+                          className="mr-3"
+                        />
+                        Playlist2{" "}
+                        <span className="ml-2">
+                          {this.props.playlisttwolength}
+                        </span>
+                      </p>
                     </Link>
                   </li>
 
-              {/* ends here */}
+                  {/* ends here */}
 
                   {this.props.location.pathname === "/" && (
                     <li>
@@ -95,6 +120,9 @@ class Sidebar extends React.Component {
                           aria-describedby="basic-addon2"
                           onChange={(e) =>
                             this.props.setSearchQuery(e.target.value)
+                          }
+                          onKeyUp={(e) =>
+                            e.key === "Enter" && this.props.searchData()
                           }
                         />
                         <div
