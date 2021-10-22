@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { userReducer } from "../reducer/user";
 import { searchReducer } from "../reducer/search";
 import thunk from "redux-thunk";
-import { playerReducer } from "../reducer/player";
+import {playerReducer} from "../reducer/player";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -23,7 +23,8 @@ export const initialState = {
     loading: false,
   },
   player: {
-    curent: {},
+    current: [],
+    album: [],
     previous: [],
   },
 };
@@ -31,7 +32,7 @@ export const initialState = {
 const bigReducer = combineReducers({
   user: userReducer,
   search: searchReducer,
-  player: playerReducer,
+  player: playerReducer
 });
 
 const configureStore = createStore(

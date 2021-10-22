@@ -2,12 +2,12 @@ import React from "react";
 import Song from "./Song";
 import { Row } from "react-bootstrap";
 
+
 class Album extends React.Component {
   state = {
     album: {},
     songs: [],
   };
-
   componentDidMount = async () => {
     let albumId = this.props.match.params.id;
 
@@ -31,6 +31,8 @@ class Album extends React.Component {
           album,
           songs: album.tracks.data,
         });
+        console.log("SONGS", this.state.songs)
+        
       }
     } catch (exception) {
       console.log(exception);
@@ -76,7 +78,7 @@ class Album extends React.Component {
             <Row>
               <div className="col-md-10 mb-5" id="trackList">
                 {this.state.songs.map((song) => (
-                  <Song track={song} key={song.id} />
+                  <Song track={song} key={song.id} album={this.state.album} />
                 ))}
               </div>
             </Row>
@@ -87,4 +89,4 @@ class Album extends React.Component {
   }
 }
 
-export default Album;
+export default Album
