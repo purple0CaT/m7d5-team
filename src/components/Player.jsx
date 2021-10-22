@@ -1,14 +1,20 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { connect } from "react-redux";
+import { BsFillHeartFill, BsHeart } from "react-icons/bs";
 import "../player.css";
 
 const mapStateToProps = (state) => ({
   song: state.player.current,
   album: state.player.album,
+  liked: state.user.liked
 });
 
-const Player = ({ song, album }) => (
+const Player = ({ song, album, liked }) =>{
+
+const isLiked = liked.find((j) => j._id === song._id)
+
+return (
   <div className="container-fluid fixed-bottom bg-container pt-1">
     <Row>
       <Col xs="5">
@@ -20,6 +26,13 @@ const Player = ({ song, album }) => (
             <div className="text-container">
               <div className="song">{song[0].title} </div>
               <div className="album">{album[0].title}</div>
+            </div>
+            <div className="icon">
+            {isLiked ? (
+              <BsFillHeartFill/>
+            ) : (
+              <BsHeart/>
+            )}
             </div>
           </div>
         ) : (
@@ -68,6 +81,6 @@ const Player = ({ song, album }) => (
       </Col>
     </Row>
   </div>
-);
+);}
 
 export default connect(mapStateToProps)(Player);
