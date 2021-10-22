@@ -19,27 +19,27 @@ class App extends React.Component {
   };
 
   search = async (string) => {
-    if (string.length > 2) {
-      try {
-        let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
-            string,
-          {
-            method: "GET",
-            headers,
-          }
-        );
+    // if (string.length > 2) {
+    //   try {
+    //     let response = await fetch(
+    //       "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
+    //         string,
+    //       {
+    //         method: "GET",
+    //         headers,
+    //       }
+    //     );
 
-        let result = await response.json();
-        let songs = result.data;
+    //     let result = await response.json();
+    //     let songs = result.data;
 
-        this.setState({
-          searchResults: songs,
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    //     this.setState({
+    //       searchResults: songs,
+    //     });
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // }
   };
 
   render() {

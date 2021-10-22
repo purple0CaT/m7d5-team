@@ -1,6 +1,9 @@
 import React from "react";
 import AlbumCard from "./AlbumCard";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Spinner } from "react-bootstrap";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => ({ search: state.search });
 
 class Home extends React.Component {
   state = {
@@ -107,13 +110,13 @@ class Home extends React.Component {
             <div>DISCOVER</div>
           </div>
         </Row>
-        {this.props.searchResults.length > 0 && (
+        {this.props.search.data.length > 0 && (
           <Row>
             <Col xs={10}>
               <div id="searchResults">
                 <h2>Search Results</h2>
                 <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
-                  {this.props.searchResults.map((song) => (
+                  {this.props.search.data.map((song) => (
                     <AlbumCard song={song} key={song.id} />
                   ))}
                 </Row>
@@ -121,7 +124,13 @@ class Home extends React.Component {
             </Col>
           </Row>
         )}
-        {this.props.searchResults.length === 0 && (
+        {this.props.search.loading && (
+          <div className="d-flex mt-5">
+            <Spinner className="mx-auto text-white" animation="border" />
+            123
+          </div>
+        )}
+        {this.props.search.data.length === 0 && (
           <>
             <Row>
               <Col xs={10}>
@@ -175,4 +184,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default connect(mapStateToProps)(Home);
