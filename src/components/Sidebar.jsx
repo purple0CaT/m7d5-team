@@ -87,7 +87,7 @@ class Sidebar extends React.Component {
                   </li>
                   <li className="nav-item nav-link">
                     <Link to="/playlistone" className="nav-item nav-link">
-                      <p style={{ color: "whitesmoke" }}>
+                      <span style={{ color: "whitesmoke" }}>
                         <RiPlayList2Fill
                           style={{ color: "blue" }}
                           className="mr-3"
@@ -96,12 +96,12 @@ class Sidebar extends React.Component {
                         <span className="ml-2">
                           {this.props.playlistonelength}
                         </span>
-                      </p>
+                      </span>
                     </Link>
                   </li>
                   <li className="nav-item nav-link">
                     <Link to="/playlisttwo" className="nav-item nav-link">
-                      <p style={{ color: "whitesmoke" }}>
+                      <span style={{ color: "whitesmoke" }}>
                         <RiPlayList2Fill
                           style={{ color: "skyblue" }}
                           className="mr-3"
@@ -110,7 +110,7 @@ class Sidebar extends React.Component {
                         <span className="ml-2">
                           {this.props.playlisttwolength}
                         </span>
-                      </p>
+                      </span>
                     </Link>
                   </li>
 
